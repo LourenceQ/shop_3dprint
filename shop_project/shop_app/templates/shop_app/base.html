@@ -2,28 +2,23 @@
 <!DOCTYPE html>
 <html lang="pt">
   <head>
-
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>{% block title %}Shop 3D{% endblock %}</title>
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
-
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
   </head>
 
   <body>
-    <div id="headers">
+    <div id="header">
       <a href="/" class="logo">My Shop</a>
     </div>
-
     <div id="subheader">
       <div class="cart">
         Seu carrinho está vazio.
       </div>
     </div>
-
     <div id="content">
       {% block content %}
       {% endblock %}
     </div>
-
   </body>
 </html>

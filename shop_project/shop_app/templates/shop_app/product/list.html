@@ -2,24 +2,24 @@
 {% load static %}
 
 {% block title %}
-  {% if category %}{{ category.name }}{% else %}Products{% endif %}
+  {% if category %}{{ category.name }}{% else %}Productos{% endif %}
 {% endblock %}
 
 {% block content %}
   <div id="sidebar">
     <h3>Categorias</h3>
     <ul>
-      <li> {% if not category %}class="selected"{% endif %}</li>
+      <li {% if not category %}class="selected"{% endif %}>
         <a href="{% url "shop_app:product_list" %}">Principal</a>
-      
+      </li>
     {% for c in categories %}
       <li{% if category.slug == c.slug %}class="selected"{% endif %}>
-      <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-     </li>
+        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+      </li>
     {% endfor %}
     </ul>
   </div>
-  <div id="main" class="product_list">
+  <div id="main" class="product-list">
     <h1>{% if category %}{{ category.name }}{% else %}Produtos{% endif %}</h1>
     {% for product in roducts %}
       <div class="item">
