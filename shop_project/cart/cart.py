@@ -27,4 +27,4 @@ class Cart(object):
         self.save()
 
     def save(self):
-        self.session.modified = True //
+        self.session.modified = True 
