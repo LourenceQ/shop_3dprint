@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from shop.models import Product
+from shop_app.models import Product
 
 class Cart(object):
     def __init__(self, request):
@@ -21,7 +21,7 @@ class Cart(object):
         if product_id not in self.Cart:
             self.cart[roduct_id] = {'quantity': 0, 'price': str(product.price)}
         if override_quantity:
-            self.cart[product_id] = ['quantity'] = quantity
+            self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
         self.save()
