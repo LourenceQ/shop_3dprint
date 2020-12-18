@@ -1,0 +1,50 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Seu carrinho de compras{% endblock %}
+
+{% block content %}
+  <h1>Seu carrinho de compras</h1>
+  <table class="cart">
+    <thead>
+      <tr>
+        <th>Imagem</th>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Remover</th>
+        <th>Unidade</th>
+        <th>Preço</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+      {% with product=item.product %}
+      <tr>
+        <td>
+          <a href="{{ product.get_absolute_rl }}">
+            <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static "img/no_image.png" %}">
+          </a>
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>
+          <form action="{% url "cart:cart_remove" product.id %}" method="post">
+          <input type="submit" value="Remove">
+          {% csrf_token %}
+          </form>
+        </td>
+        <td class="num">${{ item.price }}</td>
+        <td class="num">${{ item.total_price }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="total">
+        <td>Total</td>
+        <td colspan="4"></td>
+        <td class="num">${{ cart.get_total_price }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-right">
+    <a href="{ url "shop:poduct_list" %}" class="button light">Continue Comprando</a>
+  </p>
+{% endblock %}
