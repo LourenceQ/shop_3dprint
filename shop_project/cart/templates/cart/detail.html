@@ -18,32 +18,32 @@
     </thead>
     <tbody>
       {% for item in cart %}
-      {% with product=item.product %}
-      <tr>
-        <td>
-          <a href="{{ product.get_absolute_rl }}">
-            <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static "img/no_image.png" %} {% endif %}">
-          </a>
-        </td>
-        <td>{{ product.name }}</td>
-        <td>
-          <form action="{% url "cart:cart-add" product.id %}" method="post">
-            {{ item.update_quantity_form.quantity }}
-            {{ item.update_quantity_form.override }}
-            <input type="submit" name="Update">
+        {% with product=item.product %}
+        <tr>
+          <td>
+            <a href="{{ product.get_absolute_url }}">
+              <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static "img/no_image.png" %} {% endif %}">
+            </a>
+          </td>
+          <td>{{ product.name }}</td>
+          <td>
+            <form action="{% url "cart:cart-add" product.id %}" method="post"> <!--************************-->
+              {{ item.update_quantity_form.quantity }}
+              {{ item.update_quantity_form.override }}
+              <input type="submit" name="Update">
+              {% csrf_token %}
+            </form>
+          </td>
+          <td>
+            <form action="{% url "cart:cart_remove" product.id %}" method="post">
+            <input type="submit" value="Remove">
             {% csrf_token %}
-          </form>
-        </td>
-        <td>
-          <form action="{% url "cart:cart_remove" product.id %}" method="post">
-          <input type="submit" value="Remove">
-          {% csrf_token %}
-          </form>
-        </td>
-        <td class="num">${{ item.price }}</td>
-        <td class="num">${{ item.total_price }}</td>
-      </tr>
-      {% endwith %}
+            </form>
+          </td>
+          <td class="num">${{ item.price }}</td>
+          <td class="num">${{ item.total_price }}</td>
+        </tr>
+        {% endwith %}
       {% endfor %}
       <tr class="total">
         <td>Total</td>
@@ -53,6 +53,6 @@
     </tbody>
   </table>
   <p class="text-right">
-    <a href="{ url "shop:poduct_list" %}" class="button light">Continue Comprando</a>
+    <a href="{ url "shop_app:product_list" %}" class="button light">Continue Comprando</a>
   </p>
 {% endblock %}
