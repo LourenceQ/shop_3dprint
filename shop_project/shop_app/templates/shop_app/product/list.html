@@ -13,7 +13,7 @@
         <a href="{% url "shop_app:product_list" %}">Principal</a>
       </li>
     {% for c in categories %}
-      <li{% if category.slug == c.slug %}class="selected"{% endif %}>
+      <li {% if category.slug == c.slug %}class="selected"{% endif %}>
         <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
       </li>
     {% endfor %}
