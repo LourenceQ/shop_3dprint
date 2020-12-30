@@ -10,7 +10,7 @@ class Cart(object):
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
-            # salva um carrinho cazio na sessão
+            # salva um carrinho vazio na sessão
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
     def add(self, product, quantity=1, override_quantity=False):
@@ -41,7 +41,7 @@ class Cart(object):
 
     def __iter__(self):
         """
-        Iteração sobre os items no carringo para receber os produtos da base de dados.
+        Iteração sobre os items no carrinho para receber os produtos da base de dados.
         """
         product_ids = self.cart.keys()
         # pega os objetos do produto e adiciona ao carrinho
