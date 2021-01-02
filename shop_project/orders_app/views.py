@@ -5,14 +5,14 @@ from cart.cart import Cart
 
 # Create your views here.
 
-def order_create(request):
+def orders_app_create(request):
     cart = Cart(request)
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if dorm.is_valid():
             order = form.save()
             for item in cart:
-                OrderItem.objects.create(order= order, product=item['product'], price=item['price'],quantity_item['quantity'])
+                OrderItem.objects.create(order= order, product=item['product'], price=item['price'],quantity=item['quantity'])
             # limpa o carrinho
             cart.clear()
             return render(request,'orders_app/order/created.html',{'order': order})
